@@ -18,14 +18,10 @@ internal static class CubeGameResultsProcessor
         {
             var gameStart = line.IndexOf(':');
             var gameNumber = int.Parse(line.AsSpan()[5..gameStart]);
-
-            //Console.WriteLine($"Game {gameNumber}:");
-
             var isPossible = IsGamePossible(line.AsSpan()[(gameStart + 2)..]);
+
             if (isPossible)
                 sum += gameNumber;
-
-            //Console.WriteLine($"\t{(isPossible ? "Possible" : "Impossible")}");
         }
         return sum;
     }
@@ -39,12 +35,7 @@ internal static class CubeGameResultsProcessor
         {
             var gameStart = line.IndexOf(':');
             var gameNumber = int.Parse(line.AsSpan()[5..gameStart]);
-
-            //Console.WriteLine($"Game {gameNumber}:");
-
             var minimumCubePower = GetMinimumCubePower(line.AsSpan()[(gameStart + 2)..]);
-
-            //Console.WriteLine($"\tMinimum cube power: {minimumCubePower}");
 
             sum += minimumCubePower;
         }
@@ -64,25 +55,18 @@ internal static class CubeGameResultsProcessor
             if (char.IsDigit(currentCharacter))
             {
                 if (digitStart == -1)
-                {
                     digitStart = i;
-                }
                 else
-                {
                     digitEnd = i;
-                }
+
                 continue;
             }
             if (char.IsLetter(currentCharacter))
             {
                 if (colorStart == -1)
-                {
                     colorStart = i;
-                }
                 else
-                {
                     colorEnd = i;
-                }
             }
 
             if (i == lineCharacters.Length - 1 || currentCharacter == ',' || currentCharacter == ';')
@@ -90,12 +74,9 @@ internal static class CubeGameResultsProcessor
                 var color = (i == lineCharacters.Length ? lineCharacters[colorStart..] : lineCharacters[colorStart..(colorEnd + 1)]).ToString();
                 var count = int.Parse(lineCharacters.Slice(digitStart, digitEnd == -1 ? 1 : digitEnd - digitStart + 1));
                 var maxColor = _maxColors.TryGetValue(color, out var max) ? max : 0;
-                //Console.WriteLine($"\tColor: {color}, Count: {count}, Max: {maxColor}");
 
                 if (count > maxColor)
-                {
                     return false;
-                }
 
                 digitStart = -1;
                 digitEnd = -1;
@@ -122,25 +103,18 @@ internal static class CubeGameResultsProcessor
             if (char.IsDigit(currentCharacter))
             {
                 if (digitStart == -1)
-                {
                     digitStart = i;
-                }
                 else
-                {
                     digitEnd = i;
-                }
+
                 continue;
             }
             if (char.IsLetter(currentCharacter))
             {
                 if (colorStart == -1)
-                {
                     colorStart = i;
-                }
                 else
-                {
                     colorEnd = i;
-                }
             }
 
             if (i == lineCharacters.Length - 1 || currentCharacter == ',' || currentCharacter == ';')
@@ -149,16 +123,10 @@ internal static class CubeGameResultsProcessor
                 var count = int.Parse(lineCharacters.Slice(digitStart, digitEnd == -1 ? 1 : digitEnd - digitStart + 1));
 
                 if (colorMaximums.TryGetValue(color, out var currentMaximum))
-                {
                     if (count > currentMaximum)
-                    {
                         colorMaximums[color] = count;
-                    }
-                }
                 else
-                {
                     colorMaximums.Add(color, count);
-                }
 
                 digitStart = -1;
                 digitEnd = -1;
@@ -172,7 +140,6 @@ internal static class CubeGameResultsProcessor
         foreach (var (color, count) in colorMaximums)
         {
             minimumCubePower *= count;
-            //Console.WriteLine($"\tColor: {color}, MinRequired: {count}");
         }
 
         return minimumCubePower;

@@ -5,6 +5,7 @@ namespace AdventOfCode_2023.Day_3;
 internal static class EngineSchematicReader
 {
     private static readonly SearchValues<char> _searchValues = SearchValues.Create("1234567890.");
+    private static readonly SearchValues<char> _digitValues = SearchValues.Create("1234567890");
 
     public static int GetSumOfPartNumbers(string fileName)
     {
@@ -22,17 +23,12 @@ internal static class EngineSchematicReader
                 continue;
             }
 
-            //Console.WriteLine($"\n+[ {lineAbove} ]\n-[ {lineToCheck} ]\n+[ {line} ]\n");
-            var sumOfPartNumbers = GetSumOfPartNumbers(lineAbove.AsSpan(), lineToCheck.AsSpan(), line.AsSpan());
-            sum += sumOfPartNumbers;
+            sum += GetSumOfPartNumbers(lineAbove, lineToCheck, line);
 
             lineAbove = lineToCheck;
             lineToCheck = line;
         }
-
-        //Console.WriteLine($"\n+[ {lineAbove} ]\n-[ {lineToCheck} ]\n+[  ]\n");
-        var lastSumOfPartNumbers = GetSumOfPartNumbers(lineAbove.AsSpan(), lineToCheck.AsSpan(), string.Empty.AsSpan());
-        sum += lastSumOfPartNumbers;
+        sum = GetSumOfPartNumbers(lineAbove, lineToCheck, string.Empty);
 
         return sum;
     }
@@ -40,14 +36,28 @@ internal static class EngineSchematicReader
     {
         using var reader = new StreamReader(fileName);
 
+        var lineAbove = string.Empty;
+        var lineToCheck = string.Empty;
+
         var sum = 0;
         while (reader.ReadLine() is { } line)
         {
-            
+            if (lineToCheck.Length == 0)
+            {
+                lineToCheck = line;
+                continue;
+            }
+
+            sum += GetSumOfGearRatios(lineAbove, lineToCheck, line);
+
+            lineAbove = lineToCheck;
+            lineToCheck = line;
         }
+        sum = GetSumOfGearRatios(lineAbove, lineToCheck, string.Empty);
+
         return sum;
     }
-    private static int GetSumOfPartNumbers(in ReadOnlySpan<char> lineAbove, in ReadOnlySpan<char> lineToCheck, in ReadOnlySpan<char> lineBelow)
+    private static int GetSumOfPartNumbers(ReadOnlySpan<char> lineAbove, ReadOnlySpan<char> lineToCheck, ReadOnlySpan<char> lineBelow)
     {
         var sum = 0;
         var partNumberStart = -1;
@@ -114,6 +124,21 @@ internal static class EngineSchematicReader
                 partNumberStart = -1;
                 partNumberEnd = -1;
             }
+        }
+
+        return sum;
+    }
+    private static int GetSumOfGearRatios(ReadOnlySpan<char> lineAbove, ReadOnlySpan<char> lineToCheck, ReadOnlySpan<char> lineBelow)
+    {
+        var sum = 0;
+
+        for (var i = 0; i < lineToCheck.Length; i++)
+        {
+            var currentChar = lineToCheck[i];
+            if (currentChar != '*')
+                continue;
+
+
         }
 
         return sum;
