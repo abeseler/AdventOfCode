@@ -36,7 +36,17 @@ internal static class EngineSchematicReader
 
         return sum;
     }
+    public static int GetSumOfGearRatios(string fileName)
+    {
+        using var reader = new StreamReader(fileName);
 
+        var sum = 0;
+        while (reader.ReadLine() is { } line)
+        {
+            
+        }
+        return sum;
+    }
     private static int GetSumOfPartNumbers(in ReadOnlySpan<char> lineAbove, in ReadOnlySpan<char> lineToCheck, in ReadOnlySpan<char> lineBelow)
     {
         var sum = 0;

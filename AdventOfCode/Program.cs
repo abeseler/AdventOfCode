@@ -5,7 +5,7 @@ using AdventOfCode_2023.Day_3;
 using BenchmarkDotNet.Running;
 using System.Diagnostics;
 
-var runBenchmarks = false;
+var runBenchmarks = true;
 if (runBenchmarks)
 {
     BenchmarkRunner.Run<Benchmark>();
@@ -14,12 +14,15 @@ if (runBenchmarks)
 else
 {
     MeasureAndLog(TrebuchetCalibrationDocParser.GetCalibrationSum, "Day_1/CalibrationDocument.txt", 10);
-    //MeasureAndLog(TrebuchetCalibrationDocParserYoutube.GetCalibrationSum, "Day_1/CalibrationDocument.txt", 10);
+    MeasureAndLog(TrebuchetCalibrationDocParserYoutube.GetCalibrationSum, "Day_1/CalibrationDocument.txt", 10);
     MeasureAndLog(TrebuchetCalibrationDocParser.GetCalibrationSumIncludeTokens, "Day_1/CalibrationDocument.txt", 10);
-    //MeasureAndLog(TrebuchetCalibrationDocParserYoutube.GetCalibrationSumIncludeTokens, "Day_1/CalibrationDocument.txt", 10);
+    MeasureAndLog(TrebuchetCalibrationDocParserYoutube.GetCalibrationSumIncludeTokens, "Day_1/CalibrationDocument.txt", 10);
     MeasureAndLog(CubeGameResultsProcessor.GetSumOfPossibleGames, "Day_2/CubeConundrum.txt", 10);
+    MeasureAndLog(CubeGameResultsProcessorYoutube.GetSumOfPossibleGames, "Day_2/CubeConundrum.txt", 10);
     MeasureAndLog(CubeGameResultsProcessor.GetSumOfMinimumCubePowers, "Day_2/CubeConundrum.txt", 10);
+    MeasureAndLog(CubeGameResultsProcessorYoutube.GetSumOfMinimumCubePowers, "Day_2/CubeConundrum.txt", 10);
     MeasureAndLog(EngineSchematicReader.GetSumOfPartNumbers, "Day_3/EngineSchematic.txt", 10);
+    MeasureAndLog(EngineSchematicReader.GetSumOfGearRatios, "Day_3/EngineSchematic.txt", 10);
 }
 
 static void MeasureAndLog(Func<string, int> action, string filename, int iterations = 1)
