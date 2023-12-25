@@ -28,7 +28,7 @@ internal static class EngineSchematicReader
             lineAbove = lineToCheck;
             lineToCheck = line;
         }
-        sum = GetSumOfPartNumbers(lineAbove, lineToCheck, string.Empty);
+        sum += GetSumOfPartNumbers(lineAbove, lineToCheck, string.Empty);
 
         return sum;
     }
@@ -53,7 +53,7 @@ internal static class EngineSchematicReader
             lineAbove = lineToCheck;
             lineToCheck = line;
         }
-        sum = GetSumOfGearRatios(lineAbove, lineToCheck, string.Empty);
+        sum += GetSumOfGearRatios(lineAbove, lineToCheck, string.Empty);
 
         return sum;
     }
@@ -83,20 +83,15 @@ internal static class EngineSchematicReader
             {
                 int? partNumberValue = null;
                 var partNumber = lineToCheck[partNumberStart..(partNumberEnd + 1)];
-                //Console.WriteLine($"\tFound possible part number: {partNumber}");
                 if (partNumberStart > 0)
                 {
                     if (!_searchValues.Contains(lineToCheck[partNumberStart - 1]))
-                    {
                         partNumberValue = int.Parse(partNumber);
-                    }
                 }
                 if (partNumberValue is null && partNumberEnd < lineToCheck.Length - 1)
                 {
                     if (!_searchValues.Contains(lineToCheck[partNumberEnd + 1]))
-                    {
                         partNumberValue = int.Parse(partNumber);
-                    }
                 }
                 if (partNumberValue is null && lineAbove.Length > 0)
                 {
@@ -117,10 +112,8 @@ internal static class EngineSchematicReader
                         partNumberValue = int.Parse(partNumber);
                 }
                 if (partNumberValue is not null)
-                {
-                    //Console.WriteLine($"\tFound part number: {partNumberValue}");
                     sum += partNumberValue.Value;
-                }
+
                 partNumberStart = -1;
                 partNumberEnd = -1;
             }

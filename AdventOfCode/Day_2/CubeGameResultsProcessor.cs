@@ -123,8 +123,10 @@ internal static class CubeGameResultsProcessor
                 var count = int.Parse(lineCharacters.Slice(digitStart, digitEnd == -1 ? 1 : digitEnd - digitStart + 1));
 
                 if (colorMaximums.TryGetValue(color, out var currentMaximum))
+                {
                     if (count > currentMaximum)
                         colorMaximums[color] = count;
+                }                    
                 else
                     colorMaximums.Add(color, count);
 
