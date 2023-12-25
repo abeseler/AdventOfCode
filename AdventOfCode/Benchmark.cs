@@ -13,57 +13,57 @@ namespace AdventOfCode_2023;
 public class Benchmark
 {
     [BenchmarkCategory("Day_1_1"), Benchmark(Baseline = true)]
-    public void Day_1_Part_1()
+    public void Day_1_1()
     {
-        TrebuchetCalibrationDocParser.GetCalibrationSum("Day_1/CalibrationDocument.txt");
+        TrebuchetCalibrationDocParser.GetCalibrationSum("Day_1/Input.txt");
     }
     [BenchmarkCategory("Day_1_1"), Benchmark]
-    public void Day_1_Part_1_Youtube()
+    public void Day_1_1_Youtube()
     {
-        TrebuchetCalibrationDocParserYoutube.GetCalibrationSum("Day_1/CalibrationDocument.txt");
+        TrebuchetCalibrationDocParserYoutube.GetCalibrationSum("Day_1/Input.txt");
     }
     [BenchmarkCategory("Day_1_2"), Benchmark(Baseline = true)]
-    public void Day_1_Part_2()
+    public void Day_1_2()
     {
-        TrebuchetCalibrationDocParser.GetCalibrationSumIncludeTokens("Day_1/CalibrationDocument.txt");
+        TrebuchetCalibrationDocParser.GetCalibrationSumIncludeTokens("Day_1/Input.txt");
     }
     [BenchmarkCategory("Day_1_2"), Benchmark]
-    public void Day_1_Part_2_Youtube()
+    public void Day_1_2_Youtube()
     {
-        TrebuchetCalibrationDocParserYoutube.GetCalibrationSumIncludeTokens("Day_1/CalibrationDocument.txt");
+        TrebuchetCalibrationDocParserYoutube.GetCalibrationSumIncludeTokens("Day_1/Input.txt");
     }
 
     [BenchmarkCategory("Day_2_1"), Benchmark(Baseline = true)]
-    public void Day_2_Part_1()
+    public void Day_2_1()
     {
-        CubeGameResultsProcessor.GetSumOfPossibleGames("Day_2/CubeConundrum.txt");
+        CubeGameResultsProcessor.GetSumOfPossibleGames("Day_2/Input.txt");
     }
     [BenchmarkCategory("Day_2_1"), Benchmark]
-    public void Day_2_Part_1_Youtube()
+    public void Day_2_1_Youtube()
     {
-        CubeGameResultsProcessorYoutube.GetSumOfPossibleGames("Day_2/CubeConundrum.txt");
+        CubeGameResultsProcessorYoutube.GetSumOfPossibleGames("Day_2/Input.txt");
     }
     [BenchmarkCategory("Day_2_2"), Benchmark(Baseline = true)]
-    public void Day_2_Part_2()
+    public void Day_2_2()
     {
-        CubeGameResultsProcessor.GetSumOfMinimumCubePowers("Day_2/CubeConundrum.txt");
+        CubeGameResultsProcessor.GetSumOfMinimumCubePowers("Day_2/Input.txt");
     }
     [BenchmarkCategory("Day_2_2"), Benchmark]
-    public void Day_2_Part_2_Youtube()
+    public void Day_2_2_Youtube()
     {
-        CubeGameResultsProcessorYoutube.GetSumOfMinimumCubePowers("Day_2/CubeConundrum.txt");
+        CubeGameResultsProcessorYoutube.GetSumOfMinimumCubePowers("Day_2/Input.txt");
     }
 
     [BenchmarkCategory("Day_3_1"), Benchmark]
-    public void Day_3_Part_1()
+    public void Day_3_1()
     {
-        EngineSchematicReader.GetSumOfPartNumbers("Day_3/EngineSchematic.txt");
+        EngineSchematicReader.GetSumOfPartNumbers("Day_3/Input.txt");
     }
-    //[BenchmarkCategory("Day_3"), Benchmark]
-    //public void Day_3_Part_2()
-    //{
-    //    EngineSchematicReader.GetSumOfGearRatios("Day_3/EngineSchematic.txt");
-    //}
+    [BenchmarkCategory("Day_3_2"), Benchmark]
+    public void Day_3_2()
+    {
+        EngineSchematicReader.GetSumOfGearRatios("Day_3/Input.txt");
+    }
 
     public class Config : ManualConfig
     {
