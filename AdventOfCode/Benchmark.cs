@@ -12,6 +12,7 @@ namespace AdventOfCode_2023;
 [Config(typeof(Config))]
 public class Benchmark
 {
+    #region Day 1
     [BenchmarkCategory("Day_1_1"), Benchmark(Baseline = true)]
     public void Day_1_1()
     {
@@ -32,7 +33,9 @@ public class Benchmark
     {
         TrebuchetCalibrationDocParserYoutube.GetCalibrationSumIncludeTokens("Day_1/Input.txt");
     }
+    #endregion
 
+    #region Day 2
     [BenchmarkCategory("Day_2_1"), Benchmark(Baseline = true)]
     public void Day_2_1()
     {
@@ -53,17 +56,30 @@ public class Benchmark
     {
         CubeGameResultsProcessorYoutube.GetSumOfMinimumCubePowers("Day_2/Input.txt");
     }
+    #endregion
 
-    [BenchmarkCategory("Day_3_1"), Benchmark]
+    #region Day 3
+    [BenchmarkCategory("Day_3_1"), Benchmark(Baseline = true)]
     public void Day_3_1()
     {
         EngineSchematicReader.GetSumOfPartNumbers("Day_3/Input.txt");
     }
-    [BenchmarkCategory("Day_3_2"), Benchmark]
+    [BenchmarkCategory("Day_3_1"), Benchmark]
+    public void Day_3_1_Youtube()
+    {
+        EngineSchematicReaderYoutube.GetSumOfPartNumbers("Day_3/Input.txt");
+    }
+    [BenchmarkCategory("Day_3_2"), Benchmark(Baseline = true)]
     public void Day_3_2()
     {
         EngineSchematicReader.GetSumOfGearRatios("Day_3/Input.txt");
     }
+    [BenchmarkCategory("Day_3_2"), Benchmark]
+    public void Day_3_2_Youtube()
+    {
+        EngineSchematicReaderYoutube.GetSumOfGearRatios("Day_3/Input.txt");
+    }
+    #endregion
 
     public class Config : ManualConfig
     {

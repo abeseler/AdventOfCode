@@ -10,12 +10,15 @@ internal static class Logger
         WriteIndented = true
     };
 
-    public static void MeasureAndLog(Func<string, int> action, string filename, int iterations = 1)
+    public static void MeasureAndLog(Func<string, int> action, string filename, int iterations = 1, bool warmuup = true)
     {
-        for (int i = 0; i < 10; i++)
+        if (warmuup)
         {
-            _ = action(filename); // Warmup
-        }
+            for (int i = 0; i < 10; i++)
+            {
+                _ = action(filename);
+            }
+        }        
         var result = 0;
         var start = Stopwatch.GetTimestamp();
         for (int i = 0; i < iterations; i++)

@@ -21,5 +21,7 @@ else
     Logger.MeasureAndLog(CubeGameResultsProcessor.GetSumOfMinimumCubePowers, "Day_2/Input.txt", 10);
     Logger.MeasureAndLog(CubeGameResultsProcessorYoutube.GetSumOfMinimumCubePowers, "Day_2/Input.txt", 10);
     Logger.MeasureAndLog(EngineSchematicReader.GetSumOfPartNumbers, "Day_3/Input.txt", 10);
-    Logger.MeasureAndLog(EngineSchematicReader.GetSumOfGearRatios, "Day_3/Sample.txt", 10);
+    Logger.MeasureAndLog(EngineSchematicReaderYoutube.GetSumOfPartNumbers, "Day_3/Input.txt", 10);
+    Logger.MeasureAndLog(EngineSchematicReader.GetSumOfGearRatios, "Day_3/Input.txt", 10);
+    Logger.MeasureAndLog(EngineSchematicReaderYoutube.GetSumOfGearRatios, "Day_3/Input.txt", 10);
 }
