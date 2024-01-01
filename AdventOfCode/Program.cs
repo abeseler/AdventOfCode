@@ -2,6 +2,7 @@
 using AdventOfCode_2023.Day_1;
 using AdventOfCode_2023.Day_2;
 using AdventOfCode_2023.Day_3;
+using AdventOfCode_2023.Day_4;
 using BenchmarkDotNet.Running;
 
 var runBenchmarks = false;
@@ -24,4 +25,5 @@ else
     Logger.MeasureAndLog(EngineSchematicReaderYoutube.GetSumOfPartNumbers, "Day_3/Input.txt", 10);
     Logger.MeasureAndLog(EngineSchematicReader.GetSumOfGearRatios, "Day_3/Input.txt", 10);
     Logger.MeasureAndLog(EngineSchematicReaderYoutube.GetSumOfGearRatios, "Day_3/Input.txt", 10);
+    Logger.MeasureAndLog(ScratchcardScratcher.GetTotalPoints, "Day_4/Input.txt", 10);
 }

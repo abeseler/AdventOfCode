@@ -1,6 +1,7 @@
 using AdventOfCode_2023.Day_1;
 using AdventOfCode_2023.Day_2;
 using AdventOfCode_2023.Day_3;
+using AdventOfCode_2023.Day_4;
 
 namespace AdventOfCode_2023.Tests;
 
@@ -41,5 +42,11 @@ public sealed class Tests
     {
         var result = EngineSchematicReader.GetSumOfGearRatios("Day_3/Sample.txt");
         result.Should().Be(467835);
+    }
+    [Fact]
+    public void Day_4_1()
+    {
+        var result = ScratchcardScratcher.GetTotalPoints("Day_4/Sample.txt");
+        result.Should().Be(13);
     }
 }
