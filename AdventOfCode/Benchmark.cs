@@ -88,6 +88,11 @@ public class Benchmark
     {
         ScratchcardScratcher.GetTotalPoints("Day_4/Input.txt");
     }
+    [BenchmarkCategory("Day_4_2"), Benchmark(Baseline = true)]
+    public void Day_4_2()
+    {
+        ScratchcardScratcher.GetCardCount("Day_4/Input.txt");
+    }
     #endregion
 
     public class Config : ManualConfig

@@ -49,4 +49,10 @@ public sealed class Tests
         var result = ScratchcardScratcher.GetTotalPoints("Day_4/Sample.txt");
         result.Should().Be(13);
     }
+    [Fact]
+    public void Day_4_2()
+    {
+        var result = ScratchcardScratcher.GetCardCount("Day_4/Sample.txt");
+        result.Should().Be(30);
+    }
 }
