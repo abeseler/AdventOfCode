@@ -31,4 +31,5 @@ else
     Logger.MeasureAndLog(ScratchcardScratcher.GetCardCount, "Day_4/Input.txt", 10);
     Logger.MeasureAndLog(ScratchcardScratcherYoutube.GetCardCount, "Day_4/Input.txt", 10);
     Logger.MeasureAndLog(AlmanacDemystifier.GetLowestSeedLocation, "Day_5/Input.txt", 10);
+    Logger.MeasureAndLog(AlmanacDemystifier.GetLowestSeedLocationWithRanges, "Day_5/Input.txt", 1, false);
 }
