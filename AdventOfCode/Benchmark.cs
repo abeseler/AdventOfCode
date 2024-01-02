@@ -1,6 +1,7 @@
 ﻿using AdventOfCode_2023.Day_1;
 using AdventOfCode_2023.Day_2;
 using AdventOfCode_2023.Day_3;
+using AdventOfCode_2023.Day_4;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 
@@ -78,6 +79,14 @@ public class Benchmark
     public void Day_3_2_Youtube()
     {
         EngineSchematicReaderYoutube.GetSumOfGearRatios("Day_3/Input.txt");
+    }
+    #endregion
+
+    #region Day 4
+    [BenchmarkCategory("Day_4_1"), Benchmark(Baseline = true)]
+    public void Day_4_1()
+    {
+        ScratchcardScratcher.GetTotalPoints("Day_4/Input.txt");
     }
     #endregion
 
