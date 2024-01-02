@@ -14,7 +14,7 @@ internal static class ScratchcardScratcher
         using var reader = new StreamReader(fileName);
         while (reader.ReadLine() is { } line)
         {
-            winningNumbers.AddRange(ParseWinningNumbers(line, out var cardNumbersStartIndex));
+            PopulateWinningNumbers(winningNumbers, line, out var cardNumbersStartIndex);
             points += GetCardPoints(winningNumbers, line, cardNumbersStartIndex);
 
             winningNumbers.Clear();
@@ -22,10 +22,24 @@ internal static class ScratchcardScratcher
 
         return points;
     }
-
-    private static List<int> ParseWinningNumbers(ReadOnlySpan<char> line, out int cardNumbersStartIndex)
+    public static int GetCardCount(string fileName)
     {
         var winningNumbers = new List<int>();
+        var cardCount = 0;
+
+        using var reader = new StreamReader(fileName);
+        while (reader.ReadLine() is { } line)
+        {
+            PopulateWinningNumbers(winningNumbers, line, out var cardNumbersStartIndex);
+
+            winningNumbers.Clear();
+        }
+
+        return cardCount;
+    }
+
+    private static void PopulateWinningNumbers(List<int> winningNumbers, ReadOnlySpan<char> line, out int cardNumbersStartIndex)
+    {
         var currentIndex = line.IndexOf(':') + 2;
         var digitStartIndex = 0;
         var numberOfDigits = 0;
@@ -54,8 +68,6 @@ internal static class ScratchcardScratcher
             }
             currentIndex++;
         }
-
-        return winningNumbers;
     }
     private static int GetCardPoints(List<int> winningNumbers, ReadOnlySpan<char> line, int cardNumbersStartIndex)
     {
