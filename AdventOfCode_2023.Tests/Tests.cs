@@ -62,4 +62,10 @@ public sealed class Tests
         var result = AlmanacDemystifier.GetLowestSeedLocation("Day_5/Sample.txt");
         result.Should().Be(35);
     }
+    [Fact]
+    public void Day_5_2()
+    {
+        var result = AlmanacDemystifier.GetLowestSeedLocationWithRanges("Day_5/Sample.txt");
+        result.Should().Be(46);
+    }
 }

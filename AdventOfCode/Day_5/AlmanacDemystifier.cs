@@ -1,4 +1,5 @@
 ﻿using System.Buffers;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace AdventOfCode_2023.Day_5;
@@ -102,6 +103,51 @@ internal static class AlmanacDemystifier
         }
     }
 
+    public static long GetLowestSeedLocationWithRangesFast(string fileName)
+    {
+        var seedRanges = new List<SeedRange>();
+        var mapCategories = new Category[7];
+
+        for (var i = 0; i < mapCategories.Length; i++)
+            mapCategories[i] = new(1);
+
+        var mapIndex = -1;
+
+        using var reader = new StreamReader(fileName);
+        while (reader.ReadLine() is { } line)
+        {
+            if (seedRanges.Count == 0)
+            {
+                seedRanges.Add(new(1, long.MaxValue));
+                //PopulateSeedRanges(seedRanges, line);
+                //PopulateFillerRanges(seedRanges);
+                continue;
+            }
+            if (line.Length == 0)
+            {
+                mapIndex++;
+                continue;
+            }
+            if (!_digits.Contains(line[0]))
+                continue;
+
+            mapCategories[mapIndex].Maps.Add(GetMap(line));
+        }
+
+        var maps = CollectionsMarshal.AsSpan(mapCategories[0].Maps);
+        foreach (var map in maps)
+        {
+            ApplyMap(seedRanges, map);
+        }
+
+        foreach (var range in seedRanges.OrderBy(x => x.Min))
+        {
+            Console.WriteLine($"{range.Min} - {range.Max} -> {range.Increment}");
+        }
+
+        return 0;
+    }
+
     private static void PopulateSeeds(List<Seed> seeds, ReadOnlySpan<char> line)
     {
         var digitStart = 7;
@@ -144,6 +190,32 @@ internal static class AlmanacDemystifier
             }
         }
     }
+    private static void PopulateFillerRanges(List<SeedRange> seedRanges)
+    {
+        long minRange = 0;
+        long lastMax = 0;
+        var seedRangesToAdd = new List<SeedRange>();
+        foreach (var range in seedRanges.OrderBy(x => x.Min))
+        {
+            if (minRange < 1)
+            {
+                seedRangesToAdd.Add(new(1, range.Min - 1));
+                minRange = 1;
+                lastMax = range.Max;
+                continue;
+            }
+            if (range.Min > lastMax + 1)
+            {
+                seedRangesToAdd.Add(new(lastMax + 1, range.Min - lastMax - 1));
+                lastMax = range.Max;
+                continue;
+            }
+        }
+        if (lastMax < long.MaxValue)
+            seedRangesToAdd.Add(new(lastMax + 1, long.MaxValue - lastMax));
+
+        seedRanges.AddRange(seedRangesToAdd);
+    }
     private static Map GetMap(ReadOnlySpan<char> line)
     {
         var firstSpace = line.IndexOf(' ');
@@ -154,6 +226,39 @@ internal static class AlmanacDemystifier
         var range = long.Parse(line[(lastSpace + 1)..]);
 
         return new Map(destination, source, range);
+    }
+    private static void ApplyMap(List<SeedRange> seedRange, Map map)
+    {
+        Console.WriteLine($"{map.MinSource} - {map.MaxSource} -> {map.MinDestination} - {map.MaxDestination} | {map.DestinationIncrement}");
+        List<SeedRange>? seedRangesToAdd = null;
+        List<SeedRange>? seedRangesToRemove = null;
+        
+        for (var i = 0; i < seedRange.Count; i++)
+        {
+            var range = seedRange[i];
+            if (range.Min >= map.MinSource && range.Max <= map.MaxSource)
+            {
+                range.Increment += map.DestinationIncrement;
+                continue;
+            }
+            if (range.Min < map.MinSource && range.Max > map.MaxSource)
+            {                
+                seedRangesToAdd ??= [];
+                seedRangesToAdd.Add(new(range.Min, map.MinSource - range.Min, range.Increment));
+                seedRangesToAdd.Add(new(map.MaxSource + 1, range.Max - map.MaxSource, range.Increment));
+                seedRangesToAdd.Add(new(map.MinSource, map.MaxSource - map.MinSource + 1, range.Increment + map.DestinationIncrement));
+                
+                seedRangesToRemove ??= [];
+                seedRangesToRemove.Add(range);
+                continue;
+            }
+        }
+
+        if (seedRangesToRemove is not null)
+            seedRange.RemoveAll(seedRangesToRemove.Contains);
+
+        if (seedRangesToAdd is not null)
+            seedRange.AddRange(seedRangesToAdd);
     }
 
     private static bool IsInRange(long value, Span<SeedRange> seedRanges)
@@ -175,10 +280,11 @@ internal static class AlmanacDemystifier
         }
         return returnValue;
     }
+    [DebuggerDisplay("{MinSource} - {MaxSource} -> {MinDestination} - {MaxDestination}")]
     private struct Map(long destinationStart, long sourceStart, long range)
     {
         public long MinSource = sourceStart;
-        public long MaxSource = sourceStart + range;
+        public long MaxSource = sourceStart + range - 1;
         public long MinDestination = destinationStart;
         public long MaxDestination = destinationStart + range - 1;
         public long DestinationIncrement = destinationStart - sourceStart;
@@ -209,10 +315,12 @@ internal static class AlmanacDemystifier
         public long Value { get; set; } = value;
         public long Location { get; set; } = value;
     }
-    private readonly struct SeedRange(long start, long range)
+    [DebuggerDisplay("{Min} - {Max} -> {Increment}")]
+    private struct SeedRange(long start, long range, long increment = 0)
     {
-        public readonly long Min = start;
-        public readonly long Max = start + range - 1;
+        public long Min = start;
+        public long Max = start + range - 1;
+        public long Increment = increment;
         public readonly bool IsInRange(long value) => value >= Min && value <= Max;
     }
 }
