@@ -26,5 +26,7 @@ else
     Logger.MeasureAndLog(EngineSchematicReader.GetSumOfGearRatios, "Day_3/Input.txt", 10);
     Logger.MeasureAndLog(EngineSchematicReaderYoutube.GetSumOfGearRatios, "Day_3/Input.txt", 10);
     Logger.MeasureAndLog(ScratchcardScratcher.GetTotalPoints, "Day_4/Input.txt", 10);
+    Logger.MeasureAndLog(ScratchcardScratcherYoutube.GetTotalPoints, "Day_4/Input.txt", 10);
     Logger.MeasureAndLog(ScratchcardScratcher.GetCardCount, "Day_4/Input.txt", 10);
+    Logger.MeasureAndLog(ScratchcardScratcherYoutube.GetCardCount, "Day_4/Input.txt", 10);
 }

@@ -88,10 +88,20 @@ public class Benchmark
     {
         ScratchcardScratcher.GetTotalPoints("Day_4/Input.txt");
     }
+    [BenchmarkCategory("Day_4_1"), Benchmark]
+    public void Day_4_1_Youtube()
+    {
+        ScratchcardScratcherYoutube.GetTotalPoints("Day_4/Input.txt");
+    }
     [BenchmarkCategory("Day_4_2"), Benchmark(Baseline = true)]
     public void Day_4_2()
     {
         ScratchcardScratcher.GetCardCount("Day_4/Input.txt");
+    }
+    [BenchmarkCategory("Day_4_2"), Benchmark]
+    public void Day_4_2_Youtube()
+    {
+        ScratchcardScratcherYoutube.GetCardCount("Day_4/Input.txt");
     }
     #endregion
 
