@@ -2,6 +2,7 @@ using AdventOfCode_2023.Day_1;
 using AdventOfCode_2023.Day_2;
 using AdventOfCode_2023.Day_3;
 using AdventOfCode_2023.Day_4;
+using AdventOfCode_2023.Day_5;
 
 namespace AdventOfCode_2023.Tests;
 
@@ -54,5 +55,11 @@ public sealed class Tests
     {
         var result = ScratchcardScratcher.GetCardCount("Day_4/Sample.txt");
         result.Should().Be(30);
+    }
+    [Fact]
+    public void Day_5_1()
+    {
+        var result = AlmanacDemystifier.GetLowestSeedLocation("Day_5/Sample.txt");
+        result.Should().Be(35);
     }
 }

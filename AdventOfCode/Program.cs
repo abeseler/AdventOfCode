@@ -3,9 +3,10 @@ using AdventOfCode_2023.Day_1;
 using AdventOfCode_2023.Day_2;
 using AdventOfCode_2023.Day_3;
 using AdventOfCode_2023.Day_4;
+using AdventOfCode_2023.Day_5;
 using BenchmarkDotNet.Running;
 
-var runBenchmarks = true;
+var runBenchmarks = false;
 if (runBenchmarks)
 {
     BenchmarkRunner.Run<Benchmark>();
@@ -29,4 +30,5 @@ else
     Logger.MeasureAndLog(ScratchcardScratcherYoutube.GetTotalPoints, "Day_4/Input.txt", 10);
     Logger.MeasureAndLog(ScratchcardScratcher.GetCardCount, "Day_4/Input.txt", 10);
     Logger.MeasureAndLog(ScratchcardScratcherYoutube.GetCardCount, "Day_4/Input.txt", 10);
+    Logger.MeasureAndLog(AlmanacDemystifier.GetLowestSeedLocation, "Day_5/Input.txt", 10);
 }
