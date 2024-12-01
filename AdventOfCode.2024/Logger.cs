@@ -22,12 +22,12 @@ internal static class Logger
         }
         var duration = Stopwatch.GetElapsedTime(start);
         var endingMemory = GC.GetAllocatedBytesForCurrentThread();
-
+                
         Console.WriteLine($"""
-            {action.Method.DeclaringType?.Name + "." + action.Method.Name}
-              Result:   {result}
-              Duration: {Math.Round(duration.TotalMicroseconds / iterations, 2)} µs
-              Memory:   {Math.Round((endingMemory - startingMemory) / iterations / 1024.0, 2)} KB
+            {action.Method.DeclaringType?.Name + "." + action.Method.Name} -> {inputFile.Replace(action.Method.DeclaringType?.Name ?? "", "").Replace("/", "")}
+              [Dur] {Math.Round(duration.TotalMicroseconds / iterations, 2)} µs
+              [Mem] {Math.Round((endingMemory - startingMemory) / iterations / 1024.0, 2)} KB
+              [Res] {result}
 
             """);
     }
@@ -52,10 +52,10 @@ internal static class Logger
         var endingMemory = GC.GetAllocatedBytesForCurrentThread();
 
         Console.WriteLine($"""
-            {action.Method.DeclaringType?.Name + "." + action.Method.Name}
-              Result:   {result}
-              Duration: {Math.Round(duration.TotalMicroseconds / iterations, 2)} µs
-              Memory:   {Math.Round((endingMemory - startingMemory) / iterations / 1024.0, 2)} KB
+            {action.Method.DeclaringType?.Name + "." + action.Method.Name} -> {inputFile.Replace(action.Method.DeclaringType?.Name ?? "", "").Replace("/", "")}
+              [Dur] {Math.Round(duration.TotalMicroseconds / iterations, 2)} µs
+              [Mem] {Math.Round((endingMemory - startingMemory) / iterations / 1024.0, 2)} KB
+              [Res] {result}
 
             """);
     }

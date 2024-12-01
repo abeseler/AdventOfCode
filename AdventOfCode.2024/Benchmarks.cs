@@ -13,14 +13,13 @@ public class Benchmark
     [BenchmarkCategory("Day_1_1"), Benchmark(Baseline = true)]
     public void Day_1_1()
     {
-        Day_01.CalculateDistance("Day_01/Input.txt");
+        Day_01.Part_1("Day_01/Input.txt");
     }
     [BenchmarkCategory("Day_1_1"), Benchmark]
     public void Day_1_2()
     {
-        Day_01.CalculateSimilarity("Day_01/Input.txt");
-    }
-    
+        Day_01.Part_2("Day_01/Input.txt");
+    }    
     #endregion
 
     public class Config : ManualConfig

@@ -2,7 +2,7 @@
 
 internal static class Day_01
 {
-    public static int CalculateDistance(string filename)
+    public static int Part_1(string filename)
     {
         var leftValues = new List<int>();
         var rightValues = new List<int>();
@@ -29,7 +29,7 @@ internal static class Day_01
         return distance;
     }
 
-    public static int CalculateSimilarity(string filename)
+    public static int Part_2(string filename)
     {
         var leftValues = new List<int>();
         var rightValues = new Dictionary<int, int>();
