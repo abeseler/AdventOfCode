@@ -55,9 +55,9 @@ internal static partial class Day_03
         return sum;
     }
 
-    [GeneratedRegex("mul\\(\\d{1,3},\\d{1,3}\\)")]
+    [GeneratedRegex(@"mul\(\d{1,3},\d{1,3}\)")]
     public static partial Regex GetMultiplyInstructions();
 
-    [GeneratedRegex("(?:do|don't)\\(\\)|mul\\(\\d{1,3},\\d{1,3}\\)")]
+    [GeneratedRegex(@"(?:do|don't)\(\)|mul\(\d{1,3},\d{1,3}\)")]
     public static partial Regex GetInstructions();
 }
