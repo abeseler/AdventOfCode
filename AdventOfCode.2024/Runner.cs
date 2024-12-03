@@ -1,6 +1,4 @@
-﻿using BenchmarkDotNet.Running;
-
-namespace AdventOfCode2024;
+﻿namespace AdventOfCode2024;
 
 internal static class Runner
 {
@@ -16,5 +14,9 @@ internal static class Runner
         Logger.MeasureAndLog(Day_02.Part_1, "Day_02/Input.txt", 1, false);
         Logger.MeasureAndLog(Day_02.Part_2, "Day_02/Example.txt", 1, true);
         Logger.MeasureAndLog(Day_02.Part_2, "Day_02/Input.txt", 1, false);
+        Logger.MeasureAndLog(Day_03.Part_1, "Day_03/Example.txt", 1, true);
+        Logger.MeasureAndLog(Day_03.Part_1, "Day_03/Input.txt", 1, false);
+        Logger.MeasureAndLog(Day_03.Part_2, "Day_03/Example2.txt", 1, true);
+        Logger.MeasureAndLog(Day_03.Part_2, "Day_03/Input.txt", 1, false);
     }
 }
