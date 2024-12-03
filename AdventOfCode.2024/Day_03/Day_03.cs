@@ -41,7 +41,7 @@ internal static partial class Day_03
                 {
                     enabled = false;
                 }
-                else if (span[0] == 'm' && enabled)
+                else if (enabled)
                 {
                     var commaIndex = span.IndexOf(',');
                     var a = int.Parse(span[4..commaIndex]);
