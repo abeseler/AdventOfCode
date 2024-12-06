@@ -21,9 +21,14 @@ internal static class Runner
         //Logger.MeasureAndLog(Day_03.Part_2, "Day_03/Example2.txt", 1, false);
         //Logger.MeasureAndLog(Day_03.Part_2, "Day_03/Input.txt", 1, false);
         
-        Logger.MeasureAndLog(Day_04.Part_1, "Day_04/Example.txt", 1, false);
-        Logger.MeasureAndLog(Day_04.Part_1, "Day_04/Input.txt", 1, false);
-        Logger.MeasureAndLog(Day_04.Part_2, "Day_04/Example.txt", 1, false);
-        Logger.MeasureAndLog(Day_04.Part_2, "Day_04/Input.txt", 1, false);
+        //Logger.MeasureAndLog(Day_04.Part_1, "Day_04/Example.txt", 1, false);
+        //Logger.MeasureAndLog(Day_04.Part_1, "Day_04/Input.txt", 1, false);
+        //Logger.MeasureAndLog(Day_04.Part_2, "Day_04/Example.txt", 1, false);
+        //Logger.MeasureAndLog(Day_04.Part_2, "Day_04/Input.txt", 1, false);
+
+        Logger.MeasureAndLog(Day_05.Part_1, "Day_05/Example.txt", 1, false);
+        Logger.MeasureAndLog(Day_05.Part_1, "Day_05/Input.txt", 1, false);
+        Logger.MeasureAndLog(Day_05.Part_2, "Day_05/Example.txt", 1, false);
+        Logger.MeasureAndLog(Day_05.Part_2, "Day_05/Input.txt", 1, false);
     }
 }
