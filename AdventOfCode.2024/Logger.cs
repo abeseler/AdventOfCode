@@ -4,7 +4,7 @@ namespace AdventOfCode2024;
 
 internal static class Logger
 {
-    public static void MeasureAndLog(Func<string, int> action, string inputFile, int iterations = 1, bool warmuup = true)
+    public static void MeasureAndLog(Func<string, int> action, string inputFile, int iterations = 1, bool warmuup = false)
     {
         if (warmuup)
         {
@@ -32,7 +32,7 @@ internal static class Logger
             """);
     }
 
-    public static void MeasureAndLog(Func<string, long> action, string inputFile, int iterations = 1, bool warmuup = true)
+    public static void MeasureAndLog(Func<string, long> action, string inputFile, int iterations = 1, bool warmuup = false)
     {
         if (warmuup)
         {
