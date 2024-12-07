@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Solutions;
 
-internal sealed partial class Day07_Part2 : PuzzleSolution
+internal sealed class Day07_Part2 : PuzzleSolution
 {
     private const string DAY = "07";
     public static string FileName { get; } = $"Data/{DAY}.input";
@@ -44,7 +44,7 @@ internal sealed partial class Day07_Part2 : PuzzleSolution
             return 0;
         }
 
-        for (int i = 0; i < 3; i++) // 3 possibilities: 0, 1, 2
+        for (int i = 0; i < 3; i++)
         {
             operators[position] = i;
             var value = GenerateAndTestCombinations(result, operands, operators, position + 1);

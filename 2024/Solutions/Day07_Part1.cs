@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Solutions;
 
-internal sealed partial class Day07_Part1 : PuzzleSolution
+internal sealed class Day07_Part1 : PuzzleSolution
 {
     private const string DAY = "07";
     public static string FileName { get; } = $"Data/{DAY}.input";
