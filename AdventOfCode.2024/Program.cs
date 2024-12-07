@@ -1,22 +1,23 @@
 ﻿using AdventOfCode2024;
 
-PuzzleSolver.Solve<Day01_Part1>();
-PuzzleSolver.Solve<Day01_Part2>();
+var puzzleSolutions = typeof(Program).Assembly.GetTypes()
+    .Where(t => t.GetInterfaces().Contains(typeof(PuzzleSolution)))
+    .OrderBy(t => t.Name)
+    .ToList();
 
-PuzzleSolver.Solve<Day02_Part1>();
-PuzzleSolver.Solve<Day02_Part2>();
+foreach (var puzzleSolution in puzzleSolutions)
+{
+    try
+    {
+        typeof(PuzzleSolver)
+            .GetMethods()
+            .FirstOrDefault(m => m.Name == nameof(PuzzleSolution.Solve) && m.IsGenericMethod)?
+            .MakeGenericMethod(puzzleSolution)
+            .Invoke(null, null);
 
-PuzzleSolver.Solve<Day03_Part1>();
-PuzzleSolver.Solve<Day03_Part2>();
-
-PuzzleSolver.Solve<Day04_Part1>();
-PuzzleSolver.Solve<Day04_Part2>();
-
-PuzzleSolver.Solve<Day05_Part1>();
-PuzzleSolver.Solve<Day05_Part2>();
-
-PuzzleSolver.Solve<Day06_Part1>();
-PuzzleSolver.Solve<Day06_Part2>();
-
-PuzzleSolver.Solve<Day07_Part1>();
-PuzzleSolver.Solve<Day07_Part2>();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error while solving {puzzleSolution.Name}: {e.Message}");
+    }
+}
