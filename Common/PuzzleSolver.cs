@@ -44,7 +44,7 @@ public static class PuzzleSolver
 
         if (result != T.TestOutputExpected)
         {
-            Console.WriteLine($"{typeof(T).Name} - Test failed. Expected: {T.TestOutputExpected}, but got: {result}");
+            Console.WriteLine($"{typeof(T).Name} - Test failed. Expected ({T.TestOutputExpected}) but got ({result})");
             return;
         }
 
