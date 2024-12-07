@@ -69,7 +69,7 @@ internal sealed class Day05_Part1 : PuzzleSolution
         return locations.Min().ToString();
     }
 
-    public enum Maps
+    private enum Maps
     {
         SeedToSoil,
         SoilToFertilizer,
