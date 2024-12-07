@@ -4,7 +4,7 @@ namespace AdventOfCode2024.Solutions;
 
 internal sealed class Day03_Part2 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 01 Part 2";
+    public static string Name { get; } = "Day 03 Part 2";
     public static string FileName { get; } = "Data/03.input";
     public static string TestFileName { get; } = "Data/03.sample";
     public static string TestOutputExpected { get; } = "467835";
