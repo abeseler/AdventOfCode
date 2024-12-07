@@ -1,12 +1,12 @@
 ﻿using System.Buffers;
 
-namespace AdventOfCode2024.Solutions;
+namespace AdventOfCode.Solutions;
 
 internal sealed class Day01_Part2 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 01 Part 2";
-    public static string FileName { get; } = "Data/01.input";
-    public static string TestFileName { get; } = "Data/01.sample2";
+    private const string DAY = "01";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample2";
     public static string TestOutputExpected { get; } = "281";
 
     private static readonly KeyValuePair<int, ValueTuple<string, int>[]>[] _tokens =

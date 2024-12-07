@@ -1,12 +1,12 @@
 ﻿using Rule = (int before, int after);
 
-namespace AdventOfCode2024.Solutions;
+namespace AdventOfCode.Solutions;
 
 internal sealed partial class Day05_Part1 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 05 Part 1";
-    public static string FileName { get; } = "Data/05.input";
-    public static string TestFileName { get; } = "Data/05.sample";
+    private const string DAY = "05";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "143";
 
     public static string Solve(StreamReader reader)

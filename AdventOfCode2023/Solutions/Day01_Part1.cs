@@ -1,12 +1,12 @@
 ﻿using System.Buffers;
 
-namespace AdventOfCode2024.Solutions;
+namespace AdventOfCode.Solutions;
 
 internal sealed class Day01_Part1 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 01 Part 1";
-    public static string FileName { get; } = "Data/01.input";
-    public static string TestFileName { get; } = "Data/01.sample";
+    private const string DAY = "01";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "142";
 
     private static readonly SearchValues<char> _digits = SearchValues.Create("123456789");

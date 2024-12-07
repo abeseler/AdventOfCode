@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2024.Solutions;
+﻿namespace AdventOfCode.Solutions;
 
 internal sealed partial class Day07_Part2 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 07 Part 2";
-    public static string FileName { get; } = "Data/07.input";
-    public static string TestFileName { get; } = "Data/07.sample";
+    private const string DAY = "07";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "";
 
     public static string Solve(StreamReader reader)

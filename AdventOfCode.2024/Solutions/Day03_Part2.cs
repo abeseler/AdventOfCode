@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace AdventOfCode2024;
+namespace AdventOfCode;
 
 internal sealed partial class Day03_Part2 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 03 Part 2";
-    public static string FileName { get; } = "Data/03.input";
-    public static string TestFileName { get; } = "Data/03.sample2";
+    private const string DAY = "03";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample2";
     public static string TestOutputExpected { get; } = "48";
 
     public static string Solve(StreamReader reader)

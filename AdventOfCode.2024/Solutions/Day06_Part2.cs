@@ -1,12 +1,12 @@
 ﻿using System.Numerics;
 
-namespace AdventOfCode2024.Solutions;
+namespace AdventOfCode.Solutions;
 
 internal sealed partial class Day06_Part2 : PuzzleSolution
 {
-    public static string Name { get; } = "Day 06 Part 2";
-    public static string FileName { get; } = "Data/06.input";
-    public static string TestFileName { get; } = "Data/06.sample";
+    private const string DAY = "06";
+    public static string FileName { get; } = $"Data/{DAY}.input";
+    public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "6";
 
     private static readonly Vector2[] s_directions =

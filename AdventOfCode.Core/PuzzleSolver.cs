@@ -44,13 +44,13 @@ public static class PuzzleSolver
 
         if (result != T.TestOutputExpected)
         {
-            Console.WriteLine($"{T.Name} - Test failed. Expected: {T.TestOutputExpected}, but got: {result}");
+            Console.WriteLine($"{typeof(T).Name} - Test failed. Expected: {T.TestOutputExpected}, but got: {result}");
             return;
         }
 
         result = Solve<T>(T.FileName);
 
-        Console.WriteLine($"{T.Name} - {result}");
+        Console.WriteLine($"{typeof(T).Name} - {result}");
     }
 
     public static string Solve<T>(string fileName) where T : PuzzleSolution
