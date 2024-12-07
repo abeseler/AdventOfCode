@@ -22,7 +22,6 @@ internal sealed class Day07_Part2 : PuzzleSolution
         foreach (var (index, hand) in hands.Order(s_comparer).Index())
         {
             totalWinnings += (index + 1) * hand.Bid;
-            Console.WriteLine($"Hand {index + 1}: {hand.Hand} ({hand.Type})");
         }
 
         return totalWinnings.ToString();
