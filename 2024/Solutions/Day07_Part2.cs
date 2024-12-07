@@ -70,6 +70,11 @@ internal sealed class Day07_Part2 : PuzzleSolution
                 2 => long.Parse(value.ToString() + operands[i].ToString()),
                 _ => throw new UnreachableException()
             };
+
+            if (value > result)
+            {
+                return false;
+            }
         }
 
         return value == result;
