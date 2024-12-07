@@ -111,11 +111,10 @@ internal sealed class Day05_Part2 : PuzzleSolution
             Ranges.Add(new(start, end, Maps.None));
         }
         public List<SeedRange> Ranges { get; } = [];
-        public Maps? LastApplied => Ranges.Min(s => s.MapApplied);
         public long Min => Ranges.Min(s => s.Start);
     }
 
-    [DebuggerDisplay("{DebuggerDisplay}")]
+    [DebuggerDisplay("{ToString()}")]
     private sealed record SeedRange
     {
         public SeedRange(long start, long end, Maps mapApplied)
@@ -135,7 +134,7 @@ internal sealed class Day05_Part2 : PuzzleSolution
         {
             return Start >= start && End <= end;
         }
-        public string DebuggerDisplay => $"Start: {Start}, End: {End}, MapApplied: {MapApplied}";
+        public override string ToString() => $"Start: {Start}, End: {End}, MapApplied: {MapApplied}";
     }
 
     public enum Maps
