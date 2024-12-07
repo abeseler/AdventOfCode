@@ -2,6 +2,7 @@
 
 internal interface PuzzleSolution
 {
+    static abstract string Name { get; }
     static abstract string FileName { get; }
     static abstract string TestFileName { get; }
     static abstract string TestOutputExpected { get; }

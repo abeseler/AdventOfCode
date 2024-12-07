@@ -4,6 +4,7 @@ namespace AdventOfCode2024;
 
 internal sealed partial class Day06_Part2 : PuzzleSolution
 {
+    public static string Name { get; } = "Day 06 Part 2";
     public static string FileName { get; } = "Day_06/Input.txt";
     public static string TestFileName { get; } = "Day_06/Example.txt";
     public static string TestOutputExpected { get; } = "6";

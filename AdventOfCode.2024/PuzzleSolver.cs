@@ -2,8 +2,15 @@
 
 internal static class PuzzleSolver
 {
+    private static ConsoleColor[] colors = [
+        ConsoleColor.Green,
+        ConsoleColor.Red,
+    ];
+    private static int colorIndex = 0;
     public static void Solve<T>() where T : PuzzleSolution
     {
+        Console.ForegroundColor = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.Length;
         var result = Solve<T>(T.TestFileName);
 
         if (string.IsNullOrEmpty(result))
@@ -19,7 +26,7 @@ internal static class PuzzleSolver
 
         result = Solve<T>(T.FileName);
 
-        Console.WriteLine($"{typeof(T).Name} - {result}");
+        Console.WriteLine($"{T.Name} - {result}");
     }
 
     public static string Solve<T>(string fileName) where T : PuzzleSolution

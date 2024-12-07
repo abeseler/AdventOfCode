@@ -2,6 +2,7 @@
 
 internal sealed class Day01_Part2 : PuzzleSolution
 {
+    public static string Name { get; } = "Day 01 Part 2";
     public static string FileName { get; } = "Day_01/Input.txt";
     public static string TestFileName { get; } = "Day_01/Example.txt";
     public static string TestOutputExpected { get; } = "31";

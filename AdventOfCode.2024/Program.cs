@@ -21,3 +21,5 @@ foreach (var puzzleSolution in puzzleSolutions)
         Console.WriteLine($"Error while solving {puzzleSolution.Name}: {e.Message}");
     }
 }
+
+Console.ForegroundColor = ConsoleColor.Gray;
