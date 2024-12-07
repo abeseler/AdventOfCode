@@ -20,7 +20,7 @@ internal static class PuzzleSolver
 
         if (result != T.TestOutputExpected)
         {
-            Console.WriteLine($"Test failed. Expected: {T.TestOutputExpected}, but got: {result}");
+            Console.WriteLine($"{T.Name} - Test failed. Expected: {T.TestOutputExpected}, but got: {result}");
             return;
         }
 
