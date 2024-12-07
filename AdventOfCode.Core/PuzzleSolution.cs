@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode2024;
+﻿namespace AdventOfCode;
 
-internal interface PuzzleSolution
+public interface PuzzleSolution
 {
     static abstract string Name { get; }
     static abstract string FileName { get; }
