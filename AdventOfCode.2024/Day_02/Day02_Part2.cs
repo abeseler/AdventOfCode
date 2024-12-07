@@ -1,28 +1,14 @@
 ﻿namespace AdventOfCode2024;
 
-internal static class Day_02
+internal sealed class Day02_Part2 : PuzzleSolution
 {
-    public static int Part_1(string filename)
+    public static string FileName { get; } = "Day_02/Input.txt";
+    public static string TestFileName { get; } = "Day_02/Example.txt";
+    public static string TestOutputExpected { get; } = "4";
+
+    public static string Solve(StreamReader reader)
     {
         var safeReports = 0;
-        using var reader = new StreamReader(filename);
-        while (reader.ReadLine() is { } line)
-        {
-            var numbers = line.Split(' ').Select(int.Parse).ToArray();
-            var reportIsSafe = ReportIsSafe(numbers);
-            if (reportIsSafe)
-            {
-                safeReports++;
-            }
-        }
-
-        return safeReports;
-    }
-
-    public static int Part_2(string filename)
-    {
-        var safeReports = 0;
-        using var reader = new StreamReader(filename);
         while (reader.ReadLine() is { } line)
         {
             var numbers = line.Split(' ').Select(int.Parse).ToArray();
@@ -40,7 +26,7 @@ internal static class Day_02
             }
         }
 
-        return safeReports;
+        return safeReports.ToString();
     }
 
     private static bool ReportIsSafe(int[] numbers)
