@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode2024;
+﻿namespace AdventOfCode2024.Solutions;
 
 internal sealed class Day02_Part1 : PuzzleSolution
 {
     public static string Name { get; } = "Day 02 Part 1";
-    public static string FileName { get; } = "Day_02/Input.txt";
-    public static string TestFileName { get; } = "Day_02/Example.txt";
+    public static string FileName { get; } = "Data/02.input";
+    public static string TestFileName { get; } = "Data/02.sample";
     public static string TestOutputExpected { get; } = "2";
 
     public static string Solve(StreamReader reader)

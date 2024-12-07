@@ -5,8 +5,8 @@ namespace AdventOfCode2024;
 internal sealed partial class Day03_Part2 : PuzzleSolution
 {
     public static string Name { get; } = "Day 03 Part 2";
-    public static string FileName { get; } = "Day_03/Input.txt";
-    public static string TestFileName { get; } = "Day_03/Example2.txt";
+    public static string FileName { get; } = "Data/03.input";
+    public static string TestFileName { get; } = "Data/03.sample2";
     public static string TestOutputExpected { get; } = "48";
 
     public static string Solve(StreamReader reader)

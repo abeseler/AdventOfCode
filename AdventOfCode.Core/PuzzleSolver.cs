@@ -10,7 +10,7 @@ public static class PuzzleSolver
 
     public static void SolveAll(Type type)
     {
-        var puzzleSolutions = type.Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(PuzzleSolution)));
+        var puzzleSolutions = type.Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(PuzzleSolution))).OrderBy(t => t.Name);
         foreach (var puzzleSolution in puzzleSolutions)
         {
             try
