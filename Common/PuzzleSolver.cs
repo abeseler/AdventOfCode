@@ -33,7 +33,7 @@ public static class PuzzleSolver
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine($"\nTotal time: {Stopwatch.GetElapsedTime(start)}");
 
-        Console.ResetColor();
+        Console.ForegroundColor = ConsoleColor.Gray;
     }
 
     public static string Solve<T>() where T : PuzzleSolution
@@ -41,15 +41,14 @@ public static class PuzzleSolver
         try
         {
             var result = Solve<T>(T.TestFileName);
-            if (string.IsNullOrEmpty(result)) return result;
+            if (string.IsNullOrEmpty(result))
+            {
+                return $"{typeof(T).Name} - Not implemented";
+            }
             if (result != T.TestOutputExpected)
             {
                 return $"{typeof(T).Name} - Test failed. Expected ({T.TestOutputExpected}) but got ({result})";
             }
-        }
-        catch (FileNotFoundException)
-        {
-            return $"{typeof(T).Name} - No test file found. Skipping test.";
         }
         catch (Exception e)
         {
@@ -61,10 +60,6 @@ public static class PuzzleSolver
             var start = Stopwatch.GetTimestamp();
             var result = Solve<T>(T.FileName);
             return $"{typeof(T).Name} - {result} [{double.Round(Stopwatch.GetElapsedTime(start).TotalMilliseconds, 2)}ms]";
-        }
-        catch (FileNotFoundException)
-        {
-            return $"{typeof(T).Name} - No file found.";
         }
         catch (Exception e)
         {
