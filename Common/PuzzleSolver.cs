@@ -28,7 +28,7 @@ public static class PuzzleSolver
             }
         }
 
-        Console.ForegroundColor = ConsoleColor.Gray;
+        Console.ResetColor();
     }
 
     public static void Solve<T>() where T : PuzzleSolution
