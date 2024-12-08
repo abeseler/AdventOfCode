@@ -1,14 +1,18 @@
-﻿namespace AdventOfCode;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
+
+namespace AdventOfCode;
 
 public static class PuzzleSolver
 {
+    private static readonly ConsoleColor[] s_colors = [ConsoleColor.Green, ConsoleColor.Red];
     public static void SolveAll(Type type)
     {
-        ReadOnlySpan<ConsoleColor> colors = [ConsoleColor.Green, ConsoleColor.Red];
-        var colorIndex = 0;
-
-        var puzzleSolutions = type.Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(PuzzleSolution))).OrderBy(t => t.Name);        
-        foreach (var puzzleSolution in puzzleSolutions)
+        var puzzleSolutions = type.Assembly.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(PuzzleSolution)));
+        var results = new ConcurrentDictionary<string, string>();
+        
+        var start = Stopwatch.GetTimestamp();
+        Parallel.ForEach(puzzleSolutions, puzzleSolution =>
         {
             var result = typeof(PuzzleSolver)
                 .GetMethods()
@@ -16,11 +20,19 @@ public static class PuzzleSolver
                 .MakeGenericMethod(puzzleSolution)
                 .Invoke(null, null);
 
-            Console.ForegroundColor = colors[colorIndex];
-            Console.WriteLine(result);
+            results.TryAdd(puzzleSolution.Name, (string)result!);
+        });
 
-            colorIndex = (colorIndex + 1) % colors.Length;
+        var colorIndex = 0;
+        foreach (var result in results.OrderBy(r => r.Key))
+        {
+            Console.ForegroundColor = s_colors[colorIndex];
+            Console.WriteLine(result.Value);
+            colorIndex = (colorIndex + 1) % s_colors.Length;
         }
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine($"\nTotal time: {Stopwatch.GetElapsedTime(start)}");
+
         Console.ResetColor();
     }
 
