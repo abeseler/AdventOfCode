@@ -63,48 +63,6 @@ internal sealed class Day08_Part1 : PuzzleSolution
             }
         }
 
-        //Console.ForegroundColor = ConsoleColor.Gray;
-        //for (var i = 0; i < height; i++)
-        //{
-        //    for (var j = 0; j < width; j++)
-        //    {
-        //        var position = new Vector2(j, i);
-        //        var antenna = antennas.Values.FirstOrDefault(a => a.Any(a => a.Location == position));
-        //        if (antenna is not null)
-        //        {
-        //            if (antiNodes.ContainsKey(position) && antiNodes[position].IsCancelledOut)
-        //            {
-        //                Console.BackgroundColor = ConsoleColor.DarkRed;
-        //            }
-        //            else if (antiNodes.ContainsKey(position))
-        //            {
-        //                Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //            }
-        //            Console.Write(antenna.First(a => a.Location == position).Frequency);
-        //            Console.ResetColor();
-        //            continue;
-        //        }
-
-        //        if (antiNodes.ContainsKey(position) && antiNodes[position].IsCancelledOut)
-        //        {
-        //            Console.BackgroundColor = ConsoleColor.DarkRed;
-        //            Console.Write('.');
-        //            Console.ResetColor();
-        //        }
-        //        else if (antiNodes.ContainsKey(position))
-        //        {
-        //            Console.BackgroundColor = ConsoleColor.DarkBlue;
-        //            Console.Write('#');
-        //            Console.ResetColor();
-        //        }
-        //        else
-        //        {
-        //            Console.Write('.');
-        //        }
-        //    }
-        //    Console.WriteLine();
-        //}
-
         return antiNodes.Count.ToString();
     }
 
@@ -124,6 +82,6 @@ internal sealed class Day08_Part1 : PuzzleSolution
 
     private sealed record AntiNodes(Vector2 Location, HashSet<char> Frequencies)
     {
-        public bool IsCancelledOut => false;
+
     }
 }
