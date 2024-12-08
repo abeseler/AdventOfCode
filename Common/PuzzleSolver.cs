@@ -58,8 +58,9 @@ public static class PuzzleSolver
 
         try
         {
+            var start = Stopwatch.GetTimestamp();
             var result = Solve<T>(T.FileName);
-            return $"{typeof(T).Name} - {result}";
+            return $"{typeof(T).Name} - {result} [{double.Round(Stopwatch.GetElapsedTime(start).TotalMilliseconds, 2)}ms]";
         }
         catch (FileNotFoundException)
         {
