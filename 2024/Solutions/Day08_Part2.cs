@@ -93,13 +93,6 @@ internal sealed class Day08_Part2 : PuzzleSolution
         }
     }
 
-    private sealed record Antenna(Vector2 Location, char Frequency)
-    {
-
-    }
-
-    private sealed record AntiNodes(Vector2 Location, HashSet<char> Frequencies)
-    {
-
-    }
+    private sealed record Antenna(Vector2 Location, char Frequency);
+    private sealed record AntiNodes(Vector2 Location, HashSet<char> Frequencies);
 }

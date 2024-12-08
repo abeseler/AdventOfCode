@@ -75,13 +75,6 @@ internal sealed class Day08_Part1 : PuzzleSolution
         yield return a.Location + diffAB;
     }
 
-    private sealed record Antenna(Vector2 Location, char Frequency)
-    {
-
-    }
-
-    private sealed record AntiNodes(Vector2 Location, HashSet<char> Frequencies)
-    {
-
-    }
+    private sealed record Antenna(Vector2 Location, char Frequency);
+    private sealed record AntiNodes(Vector2 Location, HashSet<char> Frequencies);
 }
