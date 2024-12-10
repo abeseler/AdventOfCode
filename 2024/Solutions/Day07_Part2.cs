@@ -2,6 +2,9 @@
 
 namespace AdventOfCode.Solutions;
 
+/// <summary>
+/// https://adventofcode.com/2024/day/7#part2
+/// </summary>
 internal sealed class Day07_Part2 : PuzzleSolution
 {
     private const string DAY = "07";

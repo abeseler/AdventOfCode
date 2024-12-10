@@ -1,8 +1,11 @@
-﻿using System.Drawing;
+﻿using AdventOfCode.Utils;
 using System.Numerics;
 
 namespace AdventOfCode.Solutions;
 
+/// <summary>
+/// https://adventofcode.com/2024/day/6#part2
+/// </summary>
 internal sealed class Day10_Part1 : PuzzleSolution
 {
     private const string DAY = "10";
@@ -11,7 +14,7 @@ internal sealed class Day10_Part1 : PuzzleSolution
     public static string TestOutputExpected { get; } = "36";
     public static string Solve(StreamReader reader)
     {
-        var map = new Dictionary<Point, Terrain>();
+        var map = new Dictionary<Vector2, Terrain>();
         var trailHeads = new List<Terrain>();
 
         var y = 0;
@@ -21,7 +24,7 @@ internal sealed class Day10_Part1 : PuzzleSolution
             for (var x = 0; x < lineSpan.Length; x++)
             {
                 var elevation = lineSpan[x] - '0';
-                var location = new Point(x, y);
+                var location = new Vector2(x, y);
                 var terrain = new Terrain { Location = location, Elevation = elevation };
                 map[location] = terrain;
                 if (terrain.IsTrailHead)
@@ -41,10 +44,10 @@ internal sealed class Day10_Part1 : PuzzleSolution
         return trailScores.ToString();
     }
 
-    private static int CalculateTrailScore(Terrain trailHead, Dictionary<Point, Terrain> map)
+    private static int CalculateTrailScore(Terrain trailHead, Dictionary<Vector2, Terrain> map)
     {
         var score = 0;
-        var visited = new HashSet<Point>();
+        var visited = new HashSet<Vector2>();
         var queue = new Queue<Terrain>();
         queue.Enqueue(trailHead);
 
@@ -73,37 +76,23 @@ internal sealed class Day10_Part1 : PuzzleSolution
         return score;
     }
 
-    private static IEnumerable<Terrain> GetPassableNeighbors(Terrain current, Dictionary<Point, Terrain> map)
+    private static IEnumerable<Terrain> GetPassableNeighbors(Terrain current, Dictionary<Vector2, Terrain> map)
     {
-        foreach (var direction in Directions)
+        foreach (var neighbor in current.Location.Neighbours())
         {
-            var next = current.Location.Add(direction);
-            if (map.TryGetValue(next, out var neighbor) && neighbor.IsPassable(current))
+            if (map.TryGetValue(neighbor, out var terrain) && terrain.IsPassable(current))
             {
-                yield return neighbor;
+                yield return terrain;
             }
         }
     }
 
     private sealed record Terrain
     {
-        public Point Location { get; init; }
+        public Vector2 Location { get; init; }
         public int Elevation { get; init; }
         public bool IsTrailHead => Elevation == 0;
         public bool IsPeak => Elevation == 9;
         public bool IsPassable(Terrain origin) => origin.Elevation == Elevation - 1;
     }
-
-    private static readonly Point[] Directions =
-    [
-        new(0, -1), // Up
-        new(1, 0), // Right
-        new(0, 1), // Down
-        new(-1, 0), // Left
-    ];
-}
-
-file static class PointExt
-{
-    public static Point Add(this Point point, Point other) => new(point.X + other.X, point.Y + other.Y);
 }
