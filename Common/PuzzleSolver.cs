@@ -50,6 +50,10 @@ public static class PuzzleSolver
                 return $"{typeof(T).Name} - Test failed. Expected ({T.TestOutputExpected}) but got ({result})";
             }
         }
+        catch (NotImplementedException)
+        {
+            return $"{typeof(T).Name} - Not implemented";
+        }
         catch (Exception e)
         {
             return $"{typeof(T).Name} - Test failed. {e.Message}";
