@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Solutions;
+﻿using System.Runtime.InteropServices;
+
+namespace AdventOfCode.Solutions;
 
 internal sealed class Day09_Part1v2 : PuzzleSolution
 {
@@ -41,15 +43,15 @@ internal sealed class Day09_Part1v2 : PuzzleSolution
             isFileBlock = !isFileBlock;
         }
 
-        var checksum = CompactMemory(emptySpace, fileBlocks);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
 
         return checksum.ToString();
     }
 
-    private static long CompactMemory(Queue<int> emptySpace, List<FileBlock> fileBlocks)
+    private static long CompactMemory(ReadOnlySpan<FileBlock> fileBlocks, Queue<int> emptySpace)
     {
         var checksum = 0L;
-        for (var i = fileBlocks.Count - 1; i >= 0; i--)
+        for (var i = fileBlocks.Length - 1; i >= 0; i--)
         {
             var block = fileBlocks[i];
             if (block.Location <= emptySpace.Peek())
