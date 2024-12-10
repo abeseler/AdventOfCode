@@ -63,11 +63,19 @@ internal sealed class Day07_Part2 : PuzzleSolution
 
         for (int i = 1; i < operands.Length; i++)
         {
+            var right = operands[i];
             value = operators[i - 1] switch
             {
-                0 => value + operands[i],
-                1 => value * operands[i],
-                2 => long.Parse(value.ToString() + operands[i].ToString()),
+                0 => value + right,
+                1 => value * right,
+                2 => right + right switch
+                {
+                    < 10 => value * 10,
+                    < 100 => value * 100,
+                    < 1_000 => value * 1_000,
+                    < 10_000 => value * 10_000,
+                    _ => throw new UnreachableException()
+                },
                 _ => throw new UnreachableException()
             };
 

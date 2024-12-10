@@ -8,115 +8,74 @@ internal sealed class Day09_Part2 : PuzzleSolution
     public static string FileName { get; } = $"Data/{DAY}.input";
     public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "2858";
-
-    private const int EMPTY_SPACE = -1;
     public static string Solve(StreamReader reader)
     {
-        var memory = new List<int>();
-        var layout = reader.ReadLine().AsSpan();
+        var input = reader.ReadLine().AsSpan();
+        var emptySpace = new List<EmptySpace>();
+        var fileBlocks = new List<AoCFile>();
 
-        var block = 0;
-        for (var i = 0; i < layout!.Length; i += 2)
+        var isFileBlock = true;
+        var fileId = 0;
+        var location = 0;
+        for (var i = 0; i < input.Length; i++)
         {
-            var blocks = layout[i] - '0';
-            var emptySpace = i < layout!.Length - 1 ? layout[i + 1] - '0' : 0;
-
-            for (var j = 0; j < blocks; j++)
+            var value = input[i] - '0';
+            if (isFileBlock)
             {
-                memory.Add(block);
+                fileBlocks.Add(new AoCFile { Id = fileId, Location = location, Size = value });
+                location += value;
+                fileId++;
             }
-            for (var j = 0; j < emptySpace; j++)
+            else
             {
-                memory.Add(EMPTY_SPACE);
+                emptySpace.Add(new EmptySpace { Location = location, Size = value });
+                location += value;
             }
-
-            block++;
+            isFileBlock = !isFileBlock;
         }
 
-        var memorySpan = CollectionsMarshal.AsSpan(memory);
-
-        CompactMemory(memorySpan);
-        var checksum = CalculateChecksum(memorySpan);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
 
         return checksum.ToString();
     }
 
-    private static void CompactMemory(Span<int> memoryBlocks)
+    private static long CompactMemory(ReadOnlySpan<AoCFile> files, List<EmptySpace> emptySpace)
     {
-        var pageEnd = 0;
-        for (var i = memoryBlocks.Length - 1; i >= 0; i--)
+        var checksum = 0L;
+        for (var i = files.Length - 1; i >= 0; i--)
         {
-            var value = memoryBlocks[i];
-            if (value == 0) break;
-            if (value == EMPTY_SPACE) continue;
-
-            pageEnd = i;
-            while (true)
+            var file = files[i];
+            var availableSpace = emptySpace.FirstOrDefault(es => es.Size >= file.Size && es.Location < file.Location);
+            if (availableSpace.Size == file.Size)
             {
-                if (memoryBlocks[i - 1] == value)
-                {
-                    i--;
-                }
-                else
-                {
-                    break;
-                }
+                file.Location = availableSpace.Location;
+                emptySpace.Remove(availableSpace);
+            }
+            else if (availableSpace.Size > file.Size)
+            {
+                file.Location = availableSpace.Location;
+                var newEmptySpace = new EmptySpace { Location = availableSpace.Location + file.Size, Size = availableSpace.Size - file.Size };
+                emptySpace.Remove(availableSpace);
+                emptySpace.Add(newEmptySpace);
             }
 
-            var pageStart = i;
-            var pageLength = pageEnd - pageStart + 1;
-
-            var space = FindSpaceForPage(memoryBlocks[..pageStart], pageLength);
-            if (space != -1)
+            for (var j = 0; j < file.Size; j++)
             {
-                for (var j = pageStart; j <= pageEnd; j++)
-                {
-                    memoryBlocks[space++] = value;
-                    memoryBlocks[j] = EMPTY_SPACE;
-                }
+                checksum += ((j + file.Location) * file.Id);
             }
-        }
-    }
-
-    private static int FindSpaceForPage(Span<int> memoryBlocks, int pageLength)
-    {
-        for (var i = 0; i < memoryBlocks.Length; i++)
-        {
-            if (memoryBlocks[i] != EMPTY_SPACE) continue;
-
-            var space = 1;
-            while (space < pageLength)
-            {
-                var next = i + space;
-                if (next >= memoryBlocks.Length) return -1;
-                if (memoryBlocks[next] != EMPTY_SPACE) break;
-
-                space++;
-            }
-            if (space == pageLength)
-            {
-                return i;
-            }
-            else
-            {
-                i += space;
-            }
-        }
-        return -1;
-    }
-
-    private static long CalculateChecksum(Span<int> memoryBlocks)
-    {
-        long checksum = 0;
-        for (var i = 0; i < memoryBlocks.Length; i++)
-        {
-            var value = memoryBlocks[i];
-            if (value == EMPTY_SPACE)
-            {
-                continue;
-            }
-            checksum += (value * i);
         }
         return checksum;
+    }
+
+    private struct AoCFile
+    {
+        public int Id { get; init; }
+        public int Size { get; init; }
+        public int Location { get; set; }
+    }
+    private struct EmptySpace
+    {
+        public int Location { get; init; }
+        public int Size { get; set; }
     }
 }

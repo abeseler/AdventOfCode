@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Solutions;
+﻿using System.Runtime.InteropServices;
+
+namespace AdventOfCode.Solutions;
 
 internal sealed class Day09_Part1 : PuzzleSolution
 {
@@ -7,63 +9,68 @@ internal sealed class Day09_Part1 : PuzzleSolution
     public static string TestFileName { get; } = $"Data/{DAY}.sample";
     public static string TestOutputExpected { get; } = "1928";
 
-    private const int EMPTY_SPACE = -1;
     public static string Solve(StreamReader reader)
     {
-        var memoryBlocks = new List<int>();
-        var layout = reader.ReadLine().AsSpan();
+        var input = reader.ReadLine().AsSpan();
+        var emptySpace = new Queue<int>();
+        var fileBlocks = new List<FileBlock>();
 
-        var block = 0;
-        for (var i = 0; i < layout!.Length; i+=2)
+        var isFileBlock = true;
+        var fileId = 0;
+        var location = 0;
+        for (var i = 0; i < input.Length; i++)
         {
-            var blocks = layout[i] - '0';
-            var emptySpace = i < layout!.Length - 1 ? layout[i + 1] - '0' : 0;
-
-            for (var j = 0; j < blocks; j++)
+            var value = input[i] - '0';
+            if (isFileBlock)
             {
-                memoryBlocks.Add(block);
+                while (value > 0)
+                {
+                    fileBlocks.Add(new FileBlock { FileId = fileId, Location = location });
+                    location++;
+                    value--;
+                }
+                fileId++;
             }
-            for (var j = 0; j < emptySpace; j++)
+            else
             {
-                memoryBlocks.Add(EMPTY_SPACE);
+                while (value > 0)
+                {
+                    emptySpace.Enqueue(location);
+                    location++;
+                    value--;
+                }
             }
-
-            block++;
+            isFileBlock = !isFileBlock;
         }
 
-        CompactMemory(memoryBlocks);
-        var checksum = CalculateChecksum(memoryBlocks);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
 
         return checksum.ToString();
     }
 
-    private static void CompactMemory(List<int> memoryBlocks)
+    private static long CompactMemory(ReadOnlySpan<FileBlock> fileBlocks, Queue<int> emptySpace)
     {
-        for (var i = memoryBlocks.Count - 1; i >= 0; i--)
+        var checksum = 0L;
+        for (var i = fileBlocks.Length - 1; i >= 0; i--)
         {
-            var value = memoryBlocks[i];
-            if (value == EMPTY_SPACE)
+            var block = fileBlocks[i];
+            if (block.Location <= emptySpace.Peek())
             {
+                checksum += block.Location * block.FileId;
                 continue;
             }
-            memoryBlocks[i] = EMPTY_SPACE;
-            var emptySpace = memoryBlocks.IndexOf(EMPTY_SPACE);
-            memoryBlocks[emptySpace] = value;
+
+            var emptyLocation = emptySpace.Dequeue();
+            block.Location = emptyLocation;
+            checksum += block.Location * block.FileId;
         }
+
+        return checksum;
     }
 
-    private static long CalculateChecksum(List<int> memoryBlocks)
+    private struct FileBlock
     {
-        long checksum = 0;
-        for (var i = 0; i < memoryBlocks.Count; i++)
-        {
-            var value = memoryBlocks[i];
-            if (value == EMPTY_SPACE)
-            {
-                break;
-            }
-            checksum += (value * i);
-        }
-        return checksum;
+        public int FileId { get; init; }
+        public int Location { get; set; }
     }
 }
