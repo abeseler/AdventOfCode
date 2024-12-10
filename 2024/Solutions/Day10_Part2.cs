@@ -55,6 +55,7 @@ internal sealed class Day10_Part2 : PuzzleSolution
             if (current.IsPeak)
             {
                 rating++;
+                continue;
             }
             foreach (var neighbor in GetPassableNeighbors(current, map))
             {
