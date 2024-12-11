@@ -15,7 +15,7 @@ internal sealed class Day09_Part2 : PuzzleSolution
     {
         var input = reader.ReadLine().AsSpan();
         var emptySpace = new List<EmptySpace>();
-        var fileBlocks = new List<AoCFile>();
+        var files = new List<AoCFile>();
 
         var isFileBlock = true;
         var fileId = 0;
@@ -25,7 +25,7 @@ internal sealed class Day09_Part2 : PuzzleSolution
             var value = input[i] - '0';
             if (isFileBlock)
             {
-                fileBlocks.Add(new AoCFile { Id = fileId, Location = location, Size = value });
+                files.Add(new AoCFile { Id = fileId, Location = location, Size = value });
                 location += value;
                 fileId++;
             }
@@ -37,7 +37,7 @@ internal sealed class Day09_Part2 : PuzzleSolution
             isFileBlock = !isFileBlock;
         }
 
-        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(files), emptySpace);
 
         return checksum.ToString();
     }
