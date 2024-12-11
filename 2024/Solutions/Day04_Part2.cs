@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using AdventOfCode.Utils;
+using System.Numerics;
 
 namespace AdventOfCode.Solutions;
 
@@ -37,14 +38,14 @@ internal sealed class Day04_Part2 : PuzzleSolution
 
         foreach (var point in pointsToCheck)
         {
-            if (map.TryGetValue(point + new Vector2(-1, -1), out var upleft)
+            if (map.TryGetValue(point.UpLeft(), out var upleft)
                 && upleft is 'M' or 'S'
-                && map.TryGetValue(point + new Vector2(1, 1), out var downright)
+                && map.TryGetValue(point.DownRight(), out var downright)
                 && downright is 'M' or 'S'
                 && upleft != downright
-                && map.TryGetValue(point + new Vector2(1, -1), out var upright)
+                && map.TryGetValue(point.UpRight(), out var upright)
                 && upright is 'M' or 'S'
-                && map.TryGetValue(point + new Vector2(-1, 1), out var downleft)
+                && map.TryGetValue(point.DownLeft(), out var downleft)
                 && downleft is 'M' or 'S'
                 && upright != downleft)
             {
