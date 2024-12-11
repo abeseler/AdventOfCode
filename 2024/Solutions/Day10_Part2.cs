@@ -4,7 +4,7 @@ using System.Numerics;
 namespace AdventOfCode.Solutions;
 
 /// <summary>
-/// https://adventofcode.com/2024/day/6#part2
+/// https://adventofcode.com/2024/day/10#part2
 /// </summary>
 internal sealed class Day10_Part2 : PuzzleSolution
 {
