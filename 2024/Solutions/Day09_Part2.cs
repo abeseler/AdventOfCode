@@ -13,10 +13,16 @@ internal sealed class Day09_Part2 : PuzzleSolution
     public static string TestOutputExpected { get; } = "2858";
     public static string Solve(StreamReader reader)
     {
-        var input = reader.ReadLine().AsSpan();
-        var emptySpace = new List<EmptySpace>();
-        var files = new List<AoCFile>();
+        var files = BuildMemoryLayout(reader.ReadLine(), out var emptySpace);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(files), emptySpace);
 
+        return checksum.ToString();
+    }
+
+    private static List<AoCFile> BuildMemoryLayout(ReadOnlySpan<char> input, out List<EmptySpace> emptySpace)
+    {
+        var files = new List<AoCFile>();
+        emptySpace = [];
         var isFileBlock = true;
         var fileId = 0;
         var location = 0;
@@ -36,10 +42,7 @@ internal sealed class Day09_Part2 : PuzzleSolution
             }
             isFileBlock = !isFileBlock;
         }
-
-        var checksum = CompactMemory(CollectionsMarshal.AsSpan(files), emptySpace);
-
-        return checksum.ToString();
+        return files;
     }
 
     private static long CompactMemory(ReadOnlySpan<AoCFile> files, List<EmptySpace> emptySpace)

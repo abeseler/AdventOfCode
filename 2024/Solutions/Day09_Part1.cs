@@ -14,13 +14,19 @@ internal sealed class Day09_Part1 : PuzzleSolution
 
     public static string Solve(StreamReader reader)
     {
-        var input = reader.ReadLine().AsSpan();
-        var emptySpace = new Queue<int>();
-        var fileBlocks = new List<FileBlock>();
+        var fileBlocks = BuildMemoryLayout(reader.ReadLine(), out var emptySpace);
+        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
 
-        var isFileBlock = true;
+        return checksum.ToString();
+    }
+
+    private static List<FileBlock> BuildMemoryLayout(ReadOnlySpan<char> input, out Queue<int> emptySpace)
+    {
+        var fileBlocks = new List<FileBlock>();
+        emptySpace = [];
         var fileId = 0;
         var location = 0;
+        var isFileBlock = true;
         for (var i = 0; i < input.Length; i++)
         {
             var value = input[i] - '0';
@@ -45,10 +51,7 @@ internal sealed class Day09_Part1 : PuzzleSolution
             }
             isFileBlock = !isFileBlock;
         }
-
-        var checksum = CompactMemory(CollectionsMarshal.AsSpan(fileBlocks), emptySpace);
-
-        return checksum.ToString();
+        return fileBlocks;
     }
 
     private static long CompactMemory(ReadOnlySpan<FileBlock> fileBlocks, Queue<int> emptySpace)
