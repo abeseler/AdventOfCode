@@ -29,13 +29,20 @@ async function runSolutions() {
         return a.file.localeCompare(b.file, undefined, {numeric: true, sensitivity: 'base'});
     });
 
+    const red = '\x1b[31m';
+    const green = '\x1b[32m';
+    const reset = '\x1b[0m';
+    let alt = 0;
+
     console.log('\nResults:');
     results.forEach(r => {
+        let color = alt++ % 2 === 0 ? green : red;
+        
         if (!r.passed) {
-            console.log(`${r.file} - Test failed. Expected (${r.expected}) but got (${r.result})`);
+            console.error(`${color}${r.file} - Test failed. Expected (${r.expected}) but got (${r.result})${reset}`);
         }
         else {
-            console.log(`${r.file} - ${r.result} [${r.duration}ms]`);
+            console.log(`${color}${r.file} - ${r.result} [${r.duration}ms]${reset}`);
         }
     });
 
