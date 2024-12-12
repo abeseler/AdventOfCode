@@ -24,7 +24,7 @@ public static class PuzzleSolver
         });
 
         var colorIndex = 0;
-        foreach (var result in results.OrderBy(r => r.Key))
+        foreach (var result in results.Where(r => !string.IsNullOrEmpty(r.Value)).OrderBy(r => r.Key))
         {
             Console.ForegroundColor = s_colors[colorIndex];
             Console.WriteLine(result.Value);
@@ -38,6 +38,8 @@ public static class PuzzleSolver
 
     public static string Solve<T>() where T : PuzzleSolution
     {
+        if (string.IsNullOrEmpty(T.TestOutputExpected)) return "";
+
         try
         {
             var result = Solve<T>(T.TestFileName);
