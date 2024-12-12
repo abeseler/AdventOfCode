@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
-const solutionsFolder = 'solutions';
-const dataFolder = 'data';
+const solutionsFolder = '2024/solutions';
+const dataFolder = '2024/data';
 
 async function runSolutions() {
     const totalStart = process.hrtime();
