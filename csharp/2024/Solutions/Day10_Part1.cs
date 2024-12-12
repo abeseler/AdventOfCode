@@ -78,7 +78,7 @@ internal sealed class Day10_Part1 : PuzzleSolution
 
     private static IEnumerable<Terrain> GetPassableNeighbors(Terrain current, Dictionary<Vector2, Terrain> map)
     {
-        foreach (var neighbor in current.Location.Neighbours())
+        foreach (var neighbor in current.Location.Neighbors())
         {
             if (map.TryGetValue(neighbor, out var terrain) && terrain.IsPassable(current))
             {

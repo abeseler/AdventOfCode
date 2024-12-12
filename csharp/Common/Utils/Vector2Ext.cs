@@ -4,7 +4,7 @@ namespace AdventOfCode.Utils;
 
 public static class Vector2Ext
 {
-    public static IEnumerable<Vector2> Neighbours(this Vector2 v)
+    public static IEnumerable<Vector2> Neighbors(this Vector2 v)
     {
         yield return new Vector2(v.X + 1, v.Y);
         yield return new Vector2(v.X - 1, v.Y);
@@ -12,7 +12,7 @@ public static class Vector2Ext
         yield return new Vector2(v.X, v.Y - 1);
     }
 
-    public static IEnumerable<Vector2> NeighboursWithDiagonals(this Vector2 v)
+    public static IEnumerable<Vector2> NeighborsWithDiagonals(this Vector2 v)
     {
         yield return new Vector2(v.X + 1, v.Y);
         yield return new Vector2(v.X - 1, v.Y);
